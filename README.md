@@ -1,10 +1,10 @@
 # MiscUtil
-A quick port of MiscUtil to .NET Core.  
+A quick partial port of Jon Skeet's MiscUtil to .NET Core.  
 MiscUtil home: http://www.yoda.arachsys.com/csharp/miscutil/
 
 ## Status
 
-Some files are not ported yet, and may never be (PR's welcome.)
+Most is ported, while some files are not ported yet, and may never be (PRs welcome.)
 
 Places that need work are disabled with #if TOPORT ... #endif.
 
