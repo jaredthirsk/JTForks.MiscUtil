@@ -1,4 +1,3 @@
-#if TOPORT
 using System;
 using System.IO;
 
@@ -94,16 +93,21 @@ namespace MiscUtil.IO
             {
                 throw new ArgumentException("Buffer has length of 0");
             }
+
             // We could do all our own work here, but using MemoryStream is easier
             // and likely to be just as efficient.
             using (MemoryStream tempStream = new MemoryStream())
             {
                 Copy(input, tempStream, buffer);
+
+                // No MemoryStream.GetBuffer() until netstandard2.0, preventing this optimization
+#if TOPORT
                 // No need to copy the buffer if it's the right size
                 if (tempStream.Length==tempStream.GetBuffer().Length)
                 {
                     return tempStream.GetBuffer();
                 }
+#endif
                 // Okay, make a copy that's the right size
                 return tempStream.ToArray();
             }
@@ -360,5 +364,3 @@ public static void Copy(Stream input, Stream output)
         }
     }
 }
-
-#endif
